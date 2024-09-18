@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cld76fmv843ak"]
+[gd_scene load_steps=13 format=3 uid="uid://c1bux8l3i2thp"]
 
-[ext_resource type="Texture2D" uid="uid://ct7ro0mg1eh42" path="res://Assets/MinifolksHumans/Outline/MiniSwordMan.png" id="1_2yrqw"]
-[ext_resource type="Script" path="res://Scripts/Soldiers/swords_man.gd" id="1_kmug6"]
+[ext_resource type="Script" path="res://Scripts/Soldiers/halberd_man.gd" id="1_pa31d"]
+[ext_resource type="Texture2D" uid="uid://cobi362mwdmse" path="res://Assets/MinifolksHumans/Outline/MiniHalberdMan.png" id="2_jkqlp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqc5s"]
 radius = 14.0
@@ -112,14 +112,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ddym"]
 size = Vector2(33, 46)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ox3dv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf0s5"]
 bg_color = Color(0.385493, 0.385493, 0.385492, 0.470588)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne7jr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45n2n"]
 bg_color = Color(0.737255, 0.129412, 0.215686, 1)
 
-[node name="SwordMan" type="CharacterBody2D" groups=["Soldier"]]
-script = ExtResource("1_kmug6")
+[node name="HalberdMan" type="CharacterBody2D"]
+script = ExtResource("1_pa31d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 7)
@@ -128,7 +128,7 @@ shape = SubResource("CapsuleShape2D_mqc5s")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -15)
 scale = Vector2(3, 3)
-texture = ExtResource("1_2yrqw")
+texture = ExtResource("2_jkqlp")
 hframes = 6
 vframes = 6
 frame = 18
@@ -154,15 +154,9 @@ offset_left = -20.0
 offset_top = -31.0
 offset_right = 20.0
 offset_bottom = -22.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ox3dv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ne7jr")
+theme_override_styles/background = SubResource("StyleBoxFlat_sf0s5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_45n2n")
 show_percentage = false
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-rotation = -1.5708
-collide_with_areas = true
-collide_with_bodies = false
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

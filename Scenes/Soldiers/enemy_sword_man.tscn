@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cld76fmv843ak"]
+[gd_scene load_steps=13 format=3 uid="uid://letphvsa58ey"]
 
-[ext_resource type="Texture2D" uid="uid://ct7ro0mg1eh42" path="res://Assets/MinifolksHumans/Outline/MiniSwordMan.png" id="1_2yrqw"]
-[ext_resource type="Script" path="res://Scripts/Soldiers/swords_man.gd" id="1_kmug6"]
+[ext_resource type="Script" path="res://Scripts/Soldiers/enemy_swords_man.gd" id="1_fxji8"]
+[ext_resource type="Texture2D" uid="uid://co5pq88hbxofi" path="res://Assets/MinifolksHumans/Outline/EnemySwordMan.png" id="2_2441y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqc5s"]
 radius = 14.0
@@ -21,17 +21,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [18, 19, 20, 21, 22, 23, 24]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
 }
 
 [sub_resource type="Animation" id="Animation_b7nx3"]
@@ -109,17 +98,17 @@ _data = {
 "Walk": SubResource("Animation_euuxo")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ddym"]
-size = Vector2(33, 46)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ox3dv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4iax"]
 bg_color = Color(0.385493, 0.385493, 0.385492, 0.470588)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne7jr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60wk4"]
 bg_color = Color(0.737255, 0.129412, 0.215686, 1)
 
-[node name="SwordMan" type="CharacterBody2D" groups=["Soldier"]]
-script = ExtResource("1_kmug6")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t1pr"]
+size = Vector2(21, 41)
+
+[node name="EnemySwordMan" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_fxji8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 7)
@@ -128,10 +117,11 @@ shape = SubResource("CapsuleShape2D_mqc5s")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -15)
 scale = Vector2(3, 3)
-texture = ExtResource("1_2yrqw")
+texture = ExtResource("2_2441y")
+flip_h = true
 hframes = 6
 vframes = 6
-frame = 18
+frame = 25
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -143,26 +133,26 @@ autoplay = "Walk"
 path_postprocessing = 1
 debug_enabled = true
 
-[node name="Area2D" type="Area2D" parent="." groups=["Soldier"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(6.5, 9)
-shape = SubResource("RectangleShape2D_4ddym")
-
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -20.0
 offset_top = -31.0
 offset_right = 20.0
 offset_bottom = -22.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ox3dv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ne7jr")
+theme_override_styles/background = SubResource("StyleBoxFlat_j4iax")
+theme_override_styles/fill = SubResource("StyleBoxFlat_60wk4")
 show_percentage = false
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
-rotation = -1.5708
+[node name="AttackRaycast" type="RayCast2D" parent="."]
+rotation = 1.5708
 collide_with_areas = true
 collide_with_bodies = false
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="EnemyArea" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyArea"]
+position = Vector2(-10.5, 10.5)
+shape = SubResource("RectangleShape2D_2t1pr")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

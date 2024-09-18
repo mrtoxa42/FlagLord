@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cld76fmv843ak"]
+[gd_scene load_steps=12 format=3 uid="uid://bqi17n7soroy2"]
 
-[ext_resource type="Texture2D" uid="uid://ct7ro0mg1eh42" path="res://Assets/MinifolksHumans/Outline/MiniSwordMan.png" id="1_2yrqw"]
-[ext_resource type="Script" path="res://Scripts/Soldiers/swords_man.gd" id="1_kmug6"]
+[ext_resource type="Script" path="res://Scripts/Soldiers/archer_man.gd" id="1_mxd0s"]
+[ext_resource type="Texture2D" uid="uid://dhaucdol0pgi3" path="res://Assets/MinifolksHumans/Outline/MiniArcherMan.png" id="2_pq4ds"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqc5s"]
 radius = 14.0
@@ -9,29 +9,29 @@ height = 52.0
 
 [sub_resource type="Animation" id="Animation_nlhal"]
 resource_name = "Attack"
-length = 0.25
-tracks/0/type = "value"
+length = 0.5
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [18, 19, 20, 21, 22, 23, 24]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(),
 "transitions": PackedFloat32Array(),
 "values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]
 }
 
 [sub_resource type="Animation" id="Animation_b7nx3"]
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [30, 31, 32, 33]
+"values": [66, 67, 68, 69]
 }
 
 [sub_resource type="Animation" id="Animation_xm6an"]
@@ -63,7 +63,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [25, 26]
+"values": [55, 56]
 }
 
 [sub_resource type="Animation" id="Animation_knah8"]
@@ -85,7 +85,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_euuxo"]
 resource_name = "Walk"
-length = 0.25
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -94,10 +94,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 7, 8, 9, 10, 11, 12]
+"values": [11, 12, 13, 14, 15, 16]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fma1n"]
@@ -109,29 +109,26 @@ _data = {
 "Walk": SubResource("Animation_euuxo")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ddym"]
-size = Vector2(33, 46)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ox3dv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ml00l"]
 bg_color = Color(0.385493, 0.385493, 0.385492, 0.470588)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne7jr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0xsb"]
 bg_color = Color(0.737255, 0.129412, 0.215686, 1)
 
-[node name="SwordMan" type="CharacterBody2D" groups=["Soldier"]]
-script = ExtResource("1_kmug6")
+[node name="ArcherMan" type="CharacterBody2D" groups=["Archer", "Soldier"]]
+script = ExtResource("1_mxd0s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 7)
+position = Vector2(0, 9)
 shape = SubResource("CapsuleShape2D_mqc5s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -15)
 scale = Vector2(3, 3)
-texture = ExtResource("1_2yrqw")
-hframes = 6
-vframes = 6
-frame = 18
+texture = ExtResource("2_pq4ds")
+hframes = 11
+vframes = 7
+frame = 33
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -143,26 +140,31 @@ autoplay = "Walk"
 path_postprocessing = 1
 debug_enabled = true
 
-[node name="Area2D" type="Area2D" parent="." groups=["Soldier"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(6.5, 9)
-shape = SubResource("RectangleShape2D_4ddym")
-
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -20.0
 offset_top = -31.0
 offset_right = 20.0
 offset_bottom = -22.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ox3dv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ne7jr")
+theme_override_styles/background = SubResource("StyleBoxFlat_ml00l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i0xsb")
 show_percentage = false
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
+[node name="AttackRaycast" type="RayCast2D" parent="."]
+modulate = Color(0.94902, 0, 0, 1)
+position = Vector2(22, 9)
 rotation = -1.5708
+target_position = Vector2(0, 120)
+hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[node name="LineRaycast" type="RayCast2D" parent="."]
+position = Vector2(22, 9)
+rotation = -1.5708
+target_position = Vector2(0, 30)
+hit_from_inside = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
