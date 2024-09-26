@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bspa0gu4di0qf"]
+[gd_scene load_steps=25 format=3 uid="uid://bspa0gu4di0qf"]
 
 [ext_resource type="Script" path="res://Scripts/GameSystem/gui.gd" id="1_6xr3j"]
 [ext_resource type="Texture2D" uid="uid://o83228iku50l" path="res://Assets/Gui/ButtonBuySwordman.png" id="2_my0bl"]
@@ -7,6 +7,144 @@
 [ext_resource type="Texture2D" uid="uid://i4naksfhuqf8" path="res://Assets/Gui/Coin_1.png" id="4_ee70c"]
 [ext_resource type="Texture2D" uid="uid://cobi362mwdmse" path="res://Assets/MinifolksHumans/Outline/MiniHalberdMan.png" id="6_6stch"]
 [ext_resource type="Texture2D" uid="uid://dhaucdol0pgi3" path="res://Assets/MinifolksHumans/Outline/MiniArcherMan.png" id="7_ouflv"]
+[ext_resource type="Texture2D" uid="uid://b5spggok2xv26" path="res://Assets/Gui/1.png" id="8_43qvh"]
+[ext_resource type="Texture2D" uid="uid://od7n5koutqys" path="res://Assets/Gui/2.png" id="9_ytjxx"]
+[ext_resource type="Texture2D" uid="uid://b834l8b20eyk7" path="res://Assets/Gui/3.png" id="10_n5fwe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhjy1"]
+atlas = ExtResource("8_43qvh")
+region = Rect2(17, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg811"]
+atlas = ExtResource("8_43qvh")
+region = Rect2(0, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8rgl"]
+atlas = ExtResource("8_43qvh")
+region = Rect2(0, 0, 17, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uxshk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhjy1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cg811")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8rgl")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rp208"]
+atlas = ExtResource("9_ytjxx")
+region = Rect2(17, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icwkn"]
+atlas = ExtResource("9_ytjxx")
+region = Rect2(0, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl0uc"]
+atlas = ExtResource("9_ytjxx")
+region = Rect2(0, 0, 17, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wbwpa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rp208")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icwkn")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl0uc")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6pib"]
+atlas = ExtResource("10_n5fwe")
+region = Rect2(17, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j1vr"]
+atlas = ExtResource("10_n5fwe")
+region = Rect2(0, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcs07"]
+atlas = ExtResource("10_n5fwe")
+region = Rect2(0, 0, 17, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8d4ei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6pib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0j1vr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcs07")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_u576d"]
+resource_name = "CoinAni"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AniNodes/CoinBuyLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.863429, 6.38936e-05, 3.50392e-05, 1), Color(0.862745, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AniNodes/CoinBuyLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1068, 74), Vector2(1068, 130)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_reie4"]
+_data = {
+"CoinAni": SubResource("Animation_u576d")
+}
 
 [node name="Gui" type="CanvasLayer"]
 script = ExtResource("1_6xr3j")
@@ -110,6 +248,42 @@ offset_right = 1123.0
 offset_bottom = 100.0
 theme_override_font_sizes/font_size = 42
 text = "X200"
+
+[node name="Keyboards" type="Node2D" parent="."]
+
+[node name="1" type="AnimatedSprite2D" parent="Keyboards"]
+position = Vector2(47, 184)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_uxshk")
+animation = &"new_animation"
+
+[node name="2" type="AnimatedSprite2D" parent="Keyboards"]
+position = Vector2(135, 184)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_wbwpa")
+animation = &"new_animation"
+
+[node name="3" type="AnimatedSprite2D" parent="Keyboards"]
+position = Vector2(225, 184)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_8d4ei")
+animation = &"new_animation"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_reie4")
+}
+
+[node name="AniNodes" type="Node2D" parent="."]
+
+[node name="CoinBuyLabel" type="Label" parent="AniNodes"]
+modulate = Color(0.862745, 0, 0, 0)
+offset_left = 1068.0
+offset_top = 130.0
+offset_right = 1108.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 24
+text = "-10"
 
 [connection signal="pressed" from="BuyButtons/Swordman/BuySwordman" to="." method="_on_buy_swordman_pressed"]
 [connection signal="pressed" from="BuyButtons/Halberdman/BuyHalberdman" to="." method="_on_buy_halberdman_pressed"]

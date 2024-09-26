@@ -121,7 +121,7 @@ texture = ExtResource("2_2441y")
 flip_h = true
 hframes = 6
 vframes = 6
-frame = 25
+frame = 18
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -143,13 +143,24 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_60wk4")
 show_percentage = false
 
 [node name="AttackRaycast" type="RayCast2D" parent="."]
+position = Vector2(-24, 0)
 rotation = 1.5708
+target_position = Vector2(0.00011222, 31)
+hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="LineRaycast" type="RayCast2D" parent="."]
+position = Vector2(-24, 0)
+rotation = 1.5708
+target_position = Vector2(0.00011222, 31)
+hit_from_inside = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="EnemyArea" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyArea"]
 position = Vector2(-10.5, 10.5)

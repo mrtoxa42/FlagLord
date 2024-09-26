@@ -1,21 +1,29 @@
 extends CharacterBody2D
 
 @onready var nav = $NavigationAgent2D
-var speed = 140
+var speed = 200
 
-
+@onready var attack_raycast = $AttackRaycast
+@onready var line_raycast = $LineRaycast
 var currentenemy
 var attacked = false
+#var attack_speed = 1.2
 var hp = 5
-var attack_damage = 1
+var attack_damage = 3
+var take_attack 
 var death = false
+var col_raycast = false
 
 func _ready() -> void:
 	$HealthBar.max_value = hp
+	
+func _process(delta: float) -> void:
+		pass
 
 func _physics_process(delta: float) -> void:
+	
 	$HealthBar.value = hp
-	if currentenemy == null:
+	if currentenemy == null and col_raycast == false and death == false:
 		var direction = Vector3()
 		nav.target_position = GameManager.path1end.global_position
 		direction = nav.get_next_path_position() - global_position
@@ -25,36 +33,51 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 		else:
 			$AnimationPlayer.play("Idle")
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Enemy") and currentenemy == null:
+	if currentenemy == null and attacked == false and col_raycast == true:
 		$AnimationPlayer.play("Idle")
-		currentenemy = area.get_owner()
-		_Attack()
 
-
-func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area == currentenemy:
+	if attack_raycast.is_colliding():
+		var collider = attack_raycast.get_collider()
+		if collider != null and currentenemy == null:
+			if collider.is_in_group("Enemy"):
+				currentenemy = collider.get_owner()
+				$AnimationPlayer.play("Idle")
+				$AttackTimer.start()
+				if attacked == false:
+					_Attack()
+			
+	else:
 		currentenemy = null
+	
+	if line_raycast.is_colliding():
+		var collider = line_raycast.get_collider()
+		if collider != null:
+			if collider.is_in_group("Soldier"):
+				col_raycast = true
+			else:
+				col_raycast = false
+	else:
+		col_raycast = false
+	
 
 
 
 func _Attack():
 	if currentenemy != null and death == false:
-		attacked = true
-		$AnimationPlayer.play("Attack")
-		if currentenemy != null:
-			currentenemy.take_attack = 2
-			currentenemy.take_damage()
-		await $AnimationPlayer.animation_finished
+			attacked = true
+			$AnimationPlayer.play("Attack")
+			if currentenemy != null:
+				currentenemy.take_attack = attack_damage
+				currentenemy.take_damage()
+			await $AnimationPlayer.animation_finished
+			attacked = false
+			#_Attack()
+			$AttackTimer.start()
+	else:
 		attacked = false
-		var timer = get_tree().create_timer(1.2)
-		await timer.timeout
-		_Attack()
 
 func take_damage():
-	hp-= attack_damage
+	hp -= take_attack
 	if hp >0:
 		$AnimationPlayer.play("Hit")
 	else:
@@ -65,3 +88,14 @@ func _Death():
 	death = true
 	await $AnimationPlayer.animation_finished
 	queue_free()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Attack":
+		attacked = false
+	
+
+
+func _on_attack_timer_timeout() -> void:
+	attacked = false
+	_Attack()

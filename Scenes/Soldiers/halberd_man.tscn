@@ -22,17 +22,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [18, 19, 20, 21, 22, 23, 24]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
 
 [sub_resource type="Animation" id="Animation_b7nx3"]
 resource_name = "Death"
@@ -118,7 +107,7 @@ bg_color = Color(0.385493, 0.385493, 0.385492, 0.470588)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45n2n"]
 bg_color = Color(0.737255, 0.129412, 0.215686, 1)
 
-[node name="HalberdMan" type="CharacterBody2D"]
+[node name="HalberdMan" type="CharacterBody2D" groups=["Soldier"]]
 script = ExtResource("1_pa31d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -158,5 +147,20 @@ theme_override_styles/background = SubResource("StyleBoxFlat_sf0s5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_45n2n")
 show_percentage = false
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[node name="AttackRaycast" type="RayCast2D" parent="."]
+position = Vector2(26, 0)
+rotation = -1.5708
+target_position = Vector2(-5.42999e-05, 15)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="LineRaycast" type="RayCast2D" parent="."]
+position = Vector2(26, 0)
+rotation = -1.5708
+target_position = Vector2(0, 40)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -7,17 +7,21 @@ var speed = 200
 @onready var line_raycast = $LineRaycast
 var currentenemy
 var attacked = false
-var attack_speed = 1.2
+#var attack_speed = 1.2
 var hp = 2
-var attack_damage = 1
+var attack_damage = 2
+var take_attack 
 var death = false
 var col_raycast = false
 
 func _ready() -> void:
 	$HealthBar.max_value = hp
 	
+func _process(delta: float) -> void:
+		pass
 
 func _physics_process(delta: float) -> void:
+	
 	$HealthBar.value = hp
 	if currentenemy == null and col_raycast == false and death == false:
 		var direction = Vector3()
@@ -49,10 +53,13 @@ func _physics_process(delta: float) -> void:
 		var collider = line_raycast.get_collider()
 		if collider != null:
 			if collider.is_in_group("Soldier"):
+				$AttackRaycast.target_position.y = 200
 				col_raycast = true
 			else:
+				$AttackRaycast.target_position.y = 120
 				col_raycast = false
 	else:
+		$AttackRaycast.target_position.y = 120
 		col_raycast = false
 	
 
@@ -63,7 +70,7 @@ func _Attack():
 			attacked = true
 			$AnimationPlayer.play("Attack")
 			if currentenemy != null:
-				currentenemy.take_attack = 2
+				currentenemy.take_attack = attack_damage
 				currentenemy.take_damage()
 			await $AnimationPlayer.animation_finished
 			attacked = false
@@ -73,7 +80,7 @@ func _Attack():
 		attacked = false
 
 func take_damage():
-	hp -= attack_damage
+	hp -= take_attack
 	if hp >0:
 		$AnimationPlayer.play("Hit")
 	else:

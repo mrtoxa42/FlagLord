@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqi17n7soroy2"]
+[gd_scene load_steps=13 format=3 uid="uid://bqi17n7soroy2"]
 
 [ext_resource type="Script" path="res://Scripts/Soldiers/archer_man.gd" id="1_mxd0s"]
 [ext_resource type="Texture2D" uid="uid://dhaucdol0pgi3" path="res://Assets/MinifolksHumans/Outline/MiniArcherMan.png" id="2_pq4ds"]
@@ -115,6 +115,9 @@ bg_color = Color(0.385493, 0.385493, 0.385492, 0.470588)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0xsb"]
 bg_color = Color(0.737255, 0.129412, 0.215686, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cisoy"]
+size = Vector2(35, 44)
+
 [node name="ArcherMan" type="CharacterBody2D" groups=["Archer", "Soldier"]]
 script = ExtResource("1_mxd0s")
 
@@ -150,21 +153,27 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_i0xsb")
 show_percentage = false
 
 [node name="AttackRaycast" type="RayCast2D" parent="."]
-modulate = Color(0.94902, 0, 0, 1)
-position = Vector2(22, 9)
+position = Vector2(36, 9)
 rotation = -1.5708
 target_position = Vector2(0, 120)
+collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="LineRaycast" type="RayCast2D" parent="."]
-position = Vector2(22, 9)
+position = Vector2(36, 9)
 rotation = -1.5708
-target_position = Vector2(0, 30)
+target_position = Vector2(-7.24792e-05, 20)
 hit_from_inside = true
 
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="ArcherArea" type="Area2D" parent="." groups=["Soldier"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcherArea"]
+position = Vector2(16.5, 12)
+shape = SubResource("RectangleShape2D_cisoy")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
