@@ -1,13 +1,17 @@
 extends CharacterBody2D
 
-@onready var nav = $NavigationAgent2D
-var speed = 200
+
+var up_coin = preload("res://Scenes/Others/upcoin.tscn")
+
 
 @onready var attack_raycast = $AttackRaycast
 @onready var line_raycast = $LineRaycast
+@onready var nav = $NavigationAgent2D
 var currentenemy
 var attacked = false
 #var attack_speed = 1.2
+var enemy_value = 5
+var speed = 200
 var hp = 3
 var attack_damage = 1
 var take_attack 
@@ -84,6 +88,10 @@ func take_damage():
 		_Death()
 
 func _Death():
+	var Up_Coin = up_coin.instantiate()
+	Up_Coin.value_enemy = enemy_value
+	get_tree().get_root().add_child(Up_Coin)
+	Up_Coin.global_position = global_position
 	$AnimationPlayer.play("Death")
 	death = true
 	await $AnimationPlayer.animation_finished

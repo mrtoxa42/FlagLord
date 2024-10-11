@@ -16,11 +16,12 @@ func _ready() -> void:
 	GameManager.path1start = $Paths/Path1/Path1Start
 	GameManager.current_war_area = self
 
+	var timer = get_tree().create_timer(1)
+	await timer.timeout
+	_Wave1()
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_select"):
-		var Enemy_swordman = enemy_swordman.instantiate()
-		get_tree().get_root().add_child(Enemy_swordman)
-		Enemy_swordman.global_position = $Paths/Path1/Path1End.global_position
+		enemy_swordman_spawn()
 		
 	
 	if Input.is_action_just_pressed("1"):
@@ -56,6 +57,8 @@ func Buy_Swordman():
 		GameManager.gold -= 10
 		GameManager.GUI.current_buy_coin = 10
 		GameManager.GUI.coin_buy_ani()
+	else:
+		GameManager.GUI.coin_buy_ani()
 func Buy_Halberdman():
 	if GameManager.gold >= 10:
 		var Halberdman =halberdman.instantiate()
@@ -64,7 +67,8 @@ func Buy_Halberdman():
 		GameManager.gold -= 15
 		GameManager.GUI.current_buy_coin = 15
 		GameManager.GUI.coin_buy_ani()
-		
+	else:
+		GameManager.GUI.coin_buy_ani()
 func Buy_Archerman():
 	if GameManager.gold >= 25:
 		var Archerman = archerman.instantiate()
@@ -73,16 +77,27 @@ func Buy_Archerman():
 		GameManager.gold -= 25
 		GameManager.GUI.current_buy_coin = 25
 		GameManager.GUI.coin_buy_ani()
-
+	else:
+		GameManager.GUI.coin_buy_ani()
 func _on_path_1_spawner_timeout() -> void:
 	var Enemy_swordman = enemy_swordman.instantiate()
 	get_tree().get_root().add_child(Enemy_swordman)
 	Enemy_swordman.global_position = $Paths/Path1/Path1End.global_position
 
 
-
+func enemy_swordman_spawn():
+	var Enemy_swordman = enemy_swordman.instantiate()
+	get_tree().get_root().add_child(Enemy_swordman)
+	Enemy_swordman.global_position = $Paths/Path1/Path1End.global_position
+	
 
 
 func _Wave1():
-	var spawn_count_soldier
+	var spawn_count_soldier = 5
+	
+	for i in range(spawn_count_soldier):
+		var timer = get_tree().create_timer(0.5)
+		await timer.timeout
+		enemy_swordman_spawn()
+
 	

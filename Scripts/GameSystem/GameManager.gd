@@ -4,13 +4,14 @@ extends Node
 var GUI 
 
 #Genel değişkenler
-var gold = 20000
-var meat = 200
+var gold = 2000
+
 
 
 
 # Oyun içi değişkenler
 var current_war_area
+var coin_pos
 
 var path1end
 var path1start

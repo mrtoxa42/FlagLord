@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://letphvsa58ey"]
+[gd_scene load_steps=14 format=3 uid="uid://letphvsa58ey"]
 
 [ext_resource type="Script" path="res://Scripts/Soldiers/enemy_swords_man.gd" id="1_fxji8"]
 [ext_resource type="Texture2D" uid="uid://co5pq88hbxofi" path="res://Assets/MinifolksHumans/Outline/EnemySwordMan.png" id="2_2441y"]
@@ -98,6 +98,8 @@ _data = {
 "Walk": SubResource("Animation_euuxo")
 }
 
+[sub_resource type="Theme" id="Theme_1700s"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4iax"]
 bg_color = Color(0.385493, 0.385493, 0.385492, 0.470588)
 
@@ -138,6 +140,7 @@ offset_left = -20.0
 offset_top = -31.0
 offset_right = 20.0
 offset_bottom = -22.0
+theme = SubResource("Theme_1700s")
 theme_override_styles/background = SubResource("StyleBoxFlat_j4iax")
 theme_override_styles/fill = SubResource("StyleBoxFlat_60wk4")
 show_percentage = false

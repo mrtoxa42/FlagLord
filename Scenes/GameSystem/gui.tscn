@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bspa0gu4di0qf"]
+[gd_scene load_steps=26 format=3 uid="uid://bspa0gu4di0qf"]
 
 [ext_resource type="Script" path="res://Scripts/GameSystem/gui.gd" id="1_6xr3j"]
 [ext_resource type="Texture2D" uid="uid://o83228iku50l" path="res://Assets/Gui/ButtonBuySwordman.png" id="2_my0bl"]
@@ -141,9 +141,50 @@ tracks/1/keys = {
 "values": [Vector2(1068, 74), Vector2(1068, 130)]
 }
 
+[sub_resource type="Animation" id="Animation_sl84u"]
+resource_name = "NotCoin"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AniNodes/CoinBuyLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.863429, 6.38936e-05, 3.50392e-05, 1), Color(0.862745, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AniNodes/CoinBuyLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(984, 92), Vector2(977, 134)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AniNodes/CoinBuyLabel:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["NOT ENOUGH"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_reie4"]
 _data = {
-"CoinAni": SubResource("Animation_u576d")
+"CoinAni": SubResource("Animation_u576d"),
+"NotCoin": SubResource("Animation_sl84u")
 }
 
 [node name="Gui" type="CanvasLayer"]
@@ -277,13 +318,13 @@ libraries = {
 [node name="AniNodes" type="Node2D" parent="."]
 
 [node name="CoinBuyLabel" type="Label" parent="AniNodes"]
-modulate = Color(0.862745, 0, 0, 0)
-offset_left = 1068.0
-offset_top = 130.0
-offset_right = 1108.0
-offset_bottom = 164.0
+modulate = Color(0.863429, 6.38936e-05, 3.50392e-05, 1)
+offset_left = 984.0
+offset_top = 92.0
+offset_right = 1154.0
+offset_bottom = 126.0
 theme_override_font_sizes/font_size = 24
-text = "-10"
+text = "NOT ENOUGH"
 
 [connection signal="pressed" from="BuyButtons/Swordman/BuySwordman" to="." method="_on_buy_swordman_pressed"]
 [connection signal="pressed" from="BuyButtons/Halberdman/BuyHalberdman" to="." method="_on_buy_halberdman_pressed"]

@@ -2622,7 +2622,6 @@ anchor_mode = 0
 zoom = Vector2(0.5, 0.6)
 
 [node name="Asset24" type="Sprite2D" parent="."]
-visible = false
 z_index = 1
 position = Vector2(137, 574)
 scale = Vector2(0.3, 0.3)

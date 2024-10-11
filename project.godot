@@ -24,6 +24,10 @@ GameManager="*res://Scripts/GameSystem/GameManager.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
+
 [input]
 
 1={

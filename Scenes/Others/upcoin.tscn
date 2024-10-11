@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://p2wdo41crbxy"]
+
+[ext_resource type="Script" path="res://Scripts/Others/upcoin.gd" id="1_njl7n"]
+[ext_resource type="Texture2D" uid="uid://i4naksfhuqf8" path="res://Assets/Gui/Coin_1.png" id="2_e0y8j"]
+
+[node name="Upcoin" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_njl7n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_e0y8j")

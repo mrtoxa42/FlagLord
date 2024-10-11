@@ -4,6 +4,7 @@ var current_buy_coin
 
 func _ready() -> void:
 	GameManager.GUI = self
+	GameManager.coin_pos = $Info/Coin1.global_position
 
 func _process(delta: float) -> void:
 	$Info/CoinLabel.text = str(GameManager.gold)
@@ -28,6 +29,12 @@ func _on_buy_archerman_pressed() -> void:
 	GameManager.current_war_area.Buy_Archerman()
 
 func coin_buy_ani():
-	$AniNodes/CoinBuyLabel.text = "-" + str(current_buy_coin)
-	$AnimationPlayer.play("CoinAni")
-	
+	if GameManager.gold >= current_buy_coin:
+		$AniNodes/CoinBuyLabel.text = "-" + str(current_buy_coin)
+		$AnimationPlayer.play("CoinAni")
+	else:
+		$AnimationPlayer.play("NotCoin")
+		
+		
+func coin_up(enemy_value: int):
+	GameManager.gold += enemy_value
